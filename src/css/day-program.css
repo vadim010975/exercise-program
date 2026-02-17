@@ -242,6 +242,24 @@ ul {
   background-image: url("/src/svg/back-red.svg");
 }
 
+.btn-up {
+  background-image: url("/src/svg/up.svg");
+  display: none;
+}
+
+.btn-up.active {
+  display: block;
+}
+
+.btn-down {
+  background-image: url("/src/svg/down.svg");
+  display: none;
+}
+
+.btn-down.active {
+  display: block;
+}
+
 .file-container {
   width: 200px;
   height: 200px;

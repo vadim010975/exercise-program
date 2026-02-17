@@ -10,6 +10,7 @@ export default class Img {
   }
 
   edit() {
+    console.log("edit");
     this.inputEl = document.createElement("input");
     this.inputEl.type = "file";
     this.inputEl.classList.add("main-list-item__img_input");
@@ -17,8 +18,6 @@ export default class Img {
     const divEl = document.createElement("div");
     divEl.classList.add("main-list-item__img_overlapped");
     this.inputEl.after(divEl);
-    this.onClickEl = this.onClickEl.bind(this);
-    this.element.addEventListener("click", this.onClickEl);
     this.inputEl.dispatchEvent(new MouseEvent("click"));
     this.onChangeInputEl = this.onChangeInputEl.bind(this);
     this.inputEl.addEventListener("change", this.onChangeInputEl);
@@ -29,6 +28,7 @@ export default class Img {
     if (!this.newFile) return;
     const url = URL.createObjectURL(this.newFile);
     this.element.src = url;
+    this.finishEditing();
   }
 
   onClickEl() {
@@ -37,7 +37,6 @@ export default class Img {
 
   finishEditing() {
     this.inputEl.removeEventListener("change", this.onChangeInputEl);
-    this.element.removeEventListener("click", this.onClickEl);
   }
 
   createElement(path, alt) {

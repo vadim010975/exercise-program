@@ -17,13 +17,11 @@ export default class ListItem {
     this.approaches = new Approaches(this.exercise?.approaches);
     this.repetitions = new Repetitions(this.exercise?.repetitions);
     this.btns = new Buttons();
-    this.btns.editHandler = this.edit;
-    this.btns.finishEditingHandler = this.finishEditing;
-    this.btns.deleteHandler = this.delete;
-    this.btns.backHandler = this.back;
+    this.btns.editHandler = this.edit.bind(this);
+    this.btns.finishEditingHandler = this.finishEditing.bind(this);
+    this.btns.deleteHandler = this.delete.bind(this);
+    this.btns.backHandler = this.back.bind(this);
     this.createElement();
-    // this.btnEditEl = document.createElement("botton");
-    // this.btnDeleteEl = document.createElement("botton");
     this.editObj = undefined;
   }
 
@@ -34,26 +32,10 @@ export default class ListItem {
     this.liEl.appendChild(this.description.getElement());
     this.liEl.appendChild(this.approaches.getElement());
     this.liEl.appendChild(this.repetitions.getElement());
-    this.liEl.appendChild(this.btns.getElement);
+    this.liEl.appendChild(this.btns.getElement());
   }
 
   getElement() {
-
-    // const btnGroupEl = document.createElement("div");
-    // btnGroupEl.classList.add("main-list-item__btn-group");
-    // this.btnEditEl = document.createElement("bottom");
-    // this.btnEditEl.classList.add("main-list-item__btn", "btn-edit");
-    // this.btnEditEl.addEventListener("click", this.onClickBtnEdit.bind(this));
-    // btnGroupEl.appendChild(this.btnEditEl);
-    // this.btnDeleteEl = document.createElement("bottom");
-    // this.btnDeleteEl.classList.add("main-list-item__btn", "btn-delete");
-    // this.btnDeleteEl.addEventListener(
-    //   "click",
-    //   this.onClickBtnDelete.bind(this)
-    // );
-    // btnGroupEl.appendChild(this.btnDeleteEl);
-    // this.liEl.appendChild(btnGroupEl);
-
     return this.liEl;
   }
 
@@ -62,6 +44,7 @@ export default class ListItem {
   }
 
   finishEditing() {
+    this.liEl.removeEventListener("click", this.onClickLiEl);
     if (this.editObj) {
       this.editObj.finishEditing();
       this.editObj = undefined;
@@ -74,6 +57,7 @@ export default class ListItem {
   }
 
   back() {
+    this.liEl.removeEventListener("click", this.onClickLiEl);
     this.setInitialData();
     if (this.editObj) {
       this.editObj.finishEditing();
@@ -91,22 +75,22 @@ export default class ListItem {
       case e.target.matches(".main-list-item__img"):
         this.editObj = this.img;
         this.img.edit();
-        this.liEl.removeEventListener("click", this.onClickLiEl);
+        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
       case e.target.matches(".main-list-item__description"):
         this.editObj = this.description;
         this.description.edit();
-        this.liEl.removeEventListener("click", this.onClickLiEl);
+        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
       case e.target.matches(".main-list-item__approaches"):
         this.editObj = this.approaches;
         this.approaches.edit();
-        this.liEl.removeEventListener("click", this.onClickLiEl);
+        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
       case e.target.matches(".main-list-item__repetitions"):
         this.editObj = this.repetitions;
         this.repetitions.edit();
-        this.liEl.removeEventListener("click", this.onClickLiEl);
+        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
     }
   }

@@ -1,47 +1,65 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="612.007px" height="612.007px" viewBox="0 0 612.007 612.007" style="enable-background:new 0 0 612.007 612.007;"
-	 xml:space="preserve">
-<g>
-	<g id="_x31_0">
-		<g>
-			<path d="M596.168,130.647c-21.119-21.169-55.382-21.169-76.526,0L306.013,366.44L92.384,130.647
-				c-21.144-21.169-55.382-21.169-76.525,0c-21.144,21.169-21.144,55.458,0,76.627l248.504,274.31
-				c11.438,11.438,26.672,16.482,41.651,15.54c14.953,0.942,30.213-4.102,41.65-15.54l248.505-274.31
-				C617.287,186.105,617.287,151.817,596.168,130.647z"/>
-		</g>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="24px"
+   height="24px"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="down1.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="26.875"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-width="1600"
+     inkscape:window-height="847"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <title
+     id="title1">Iconly/Light-Outline/Arrow - Up 2</title>
+  <g
+     id="Iconly/Light-Outline/Arrow---Up-2"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     transform="matrix(1,0,0,-1,0,24)">
+    <g
+       id="Arrow---Up-2"
+       transform="rotate(180,10,8.25)"
+       fill="#000000"
+       fill-rule="nonzero">
+      <path
+         d="M 0.46966991,0.46966991 C 0.73593648,0.20340335 1.1526002,0.1791973 1.4462116,0.39705176 L 1.5303301,0.46966991 8,6.939 14.46967,0.46966991 C 14.735936,0.20340335 15.1526,0.1791973 15.446212,0.39705176 l 0.08412,0.0726182 c 0.266267,0.26626657 0.290473,0.68293029 0.07262,0.97654169 l -0.07262,0.084118 -6.9999999,7 C 8.2640635,8.7965967 7.8473998,8.8208027 7.5537883,8.6029482 l -0.084118,-0.072618 -6.99999999,-7 c -0.29289321,-0.2928932 -0.29289321,-0.76776697 0,-1.06066019 z"
+         id="Stroke-1" />
+    </g>
+  </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Iconly/Light-Outline/Arrow - Up 2</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
 </svg>
