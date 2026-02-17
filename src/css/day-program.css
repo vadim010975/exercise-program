@@ -206,7 +206,8 @@ ul {
 .main-list-item__btn-group {
   flex-basis: 10%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 10px 0;
 }
 
 .main-list-item__btn-group {
@@ -249,4 +250,8 @@ ul {
 .preview-image {
   width: 200px;
   height: 200px;
+}
+
+.footer {
+  height: 100px;
 }

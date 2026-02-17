@@ -3,6 +3,7 @@ import Img from "./Img.js";
 import Description from "./Description.js";
 import Approaches from "./Approaches.js";
 import Repetitions from "./Repetitions.js";
+import Buttons from "./Buttons.js";
 
 export default class ListItem {
   constructor(exercise) {
@@ -15,62 +16,68 @@ export default class ListItem {
     this.description = new Description(this.exercise?.description);
     this.approaches = new Approaches(this.exercise?.approaches);
     this.repetitions = new Repetitions(this.exercise?.repetitions);
-    this.btnEditEl = document.createElement("bottom");
-    this.btnDeleteEl = document.createElement("bottom");
+    this.btns = new Buttons();
+    this.btns.editHandler = this.edit;
+    this.btns.finishEditingHandler = this.finishEditing;
+    this.btns.deleteHandler = this.delete;
+    this.btns.backHandler = this.back;
+    this.createElement();
+    // this.btnEditEl = document.createElement("botton");
+    // this.btnDeleteEl = document.createElement("botton");
     this.editObj = undefined;
   }
 
-  getElement() {
+  createElement() {
     this.liEl = document.createElement("li");
     this.liEl.classList.add("main-list-item");
     this.liEl.appendChild(this.img.getElement());
     this.liEl.appendChild(this.description.getElement());
     this.liEl.appendChild(this.approaches.getElement());
     this.liEl.appendChild(this.repetitions.getElement());
-    const btnGroupEl = document.createElement("div");
-    btnGroupEl.classList.add("main-list-item__btn-group");
-    this.btnEditEl = document.createElement("bottom");
-    this.btnEditEl.classList.add("main-list-item__btn", "btn-edit");
-    this.btnEditEl.addEventListener("click", this.onClickBtnEdit.bind(this));
-    btnGroupEl.appendChild(this.btnEditEl);
-    this.btnDeleteEl = document.createElement("bottom");
-    this.btnDeleteEl.classList.add("main-list-item__btn", "btn-delete");
-    this.btnDeleteEl.addEventListener(
-      "click",
-      this.onClickBtnDelete.bind(this)
-    );
-    btnGroupEl.appendChild(this.btnDeleteEl);
-    this.liEl.appendChild(btnGroupEl);
+    this.liEl.appendChild(this.btns.getElement);
+  }
+
+  getElement() {
+
+    // const btnGroupEl = document.createElement("div");
+    // btnGroupEl.classList.add("main-list-item__btn-group");
+    // this.btnEditEl = document.createElement("bottom");
+    // this.btnEditEl.classList.add("main-list-item__btn", "btn-edit");
+    // this.btnEditEl.addEventListener("click", this.onClickBtnEdit.bind(this));
+    // btnGroupEl.appendChild(this.btnEditEl);
+    // this.btnDeleteEl = document.createElement("bottom");
+    // this.btnDeleteEl.classList.add("main-list-item__btn", "btn-delete");
+    // this.btnDeleteEl.addEventListener(
+    //   "click",
+    //   this.onClickBtnDelete.bind(this)
+    // );
+    // btnGroupEl.appendChild(this.btnDeleteEl);
+    // this.liEl.appendChild(btnGroupEl);
+
     return this.liEl;
   }
 
-  async onClickBtnEdit() {
-    if (!this.btnEditEl.matches(".active")) {
-      this.btnEditEl.classList.add("active");
-      this.btnDeleteEl.classList.add("back");
-      this.runEditingNavigation();
-    } else {
-      this.btnEditEl.classList.remove("active");
-      this.btnDeleteEl.classList.remove("back");
-      if (this.editObj) {
-        this.editObj.finishEditing();
-        this.editObj = undefined;
-      }
-      this.getNewData();
-    }
+  edit() {
+    this.runEditingNavigation();
   }
 
-  onClickBtnDelete() {
-    if (!this.btnDeleteEl.matches(".back")) {
-      this.removeExercise();
-    } else {
-      this.setInitialData();
-      this.btnEditEl.classList.remove("active");
-      this.btnDeleteEl.classList.remove("back");
-      if (this.editObj) {
-        this.editObj.finishEditing();
-        this.editObj = undefined;
-      }
+  finishEditing() {
+    if (this.editObj) {
+      this.editObj.finishEditing();
+      this.editObj = undefined;
+    }
+    this.getNewData();
+  }
+
+  delete() {
+    this.removeExercise();
+  }
+
+  back() {
+    this.setInitialData();
+    if (this.editObj) {
+      this.editObj.finishEditing();
+      this.editObj = undefined;
     }
   }
 
