@@ -1,3 +1,5 @@
+import List from "./List.js";
+
 export default class Buttons {
   constructor() {
     this.btnGroupEl = document.createElement("div");
@@ -52,11 +54,39 @@ export default class Buttons {
   activateMoving() {
     this.btnUpEl.classList.add("active");
     this.btnDownEl.classList.add("active");
+    this.onClickBtnUp = this.onClickBtnUp.bind(this);
+    this.btnUpEl.addEventListener("click", this.onClickBtnUp);
+    this.onClickBtnDown = this.onClickBtnDown.bind(this);
+    this.btnDownEl.addEventListener("click", this.onClickBtnDown);
   }
 
   deactivateMoving() {
     this.btnUpEl.classList.remove("active");
     this.btnDownEl.classList.remove("active");
+    this.btnUpEl.removeEventListener("click", this.onClickBtnUp);
+    this.btnDownEl.removeEventListener("click", this.onClickBtnDown);
+  }
+
+  onClickBtnUp() {
+    this.getElement();
+    List.changeCurrentProgram({
+      direction: "up",
+      index: this.getIndex(),
+    });
+  }
+
+  onClickBtnDown() {
+    this.getElement();
+    List.changeCurrentProgram({
+      direction: "down",
+      index: this.getIndex(),
+    });
+  }
+
+  getIndex() {
+    return [...this.btnGroupEl.closest("ul").children].findIndex(
+      (element) => element === this.btnGroupEl.parentElement
+    );
   }
 
   // editHandler() {}
