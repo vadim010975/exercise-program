@@ -208,11 +208,16 @@ ul {
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
-}
-
-.main-list-item__btn-group {
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.main-list-item:has(.main-list-item__btn.btn-edit.active) 
+.main-list-item__btn-group,
+.main-list-item:hover .main-list-item__btn-group {
+  opacity: 1;
 }
 
 .main-list-item__btn {

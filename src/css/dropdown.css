@@ -17,7 +17,6 @@
   cursor: pointer;
   overflow: hidden;
   transition: line-height 0.5s , border-width 0.5s;
-
 }
 
 .dropdown-list.activity {
