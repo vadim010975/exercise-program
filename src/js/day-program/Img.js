@@ -10,7 +10,6 @@ export default class Img {
   }
 
   edit() {
-    console.log("edit");
     this.inputEl = document.createElement("input");
     this.inputEl.type = "file";
     this.inputEl.classList.add("main-list-item__img_input");

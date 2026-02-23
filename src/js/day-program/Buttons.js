@@ -23,31 +23,28 @@ export default class Buttons {
   }
 
   onClickBtnEdit() {
-    if (!this.btnEditEl.matches(".active")) {
+    if (!this.checkState() && !this.btnEditEl.matches(".active")) {
       this.btnEditEl.classList.add("active");
       this.btnDeleteEl.classList.add("back");
       this.activateMoving();
       this.editHandler();
-    } else {
+    } else if (this.btnEditEl.matches(".active")) {
       this.btnEditEl.classList.remove("active");
       this.btnDeleteEl.classList.remove("back");
       this.deactivateMoving();
-      this.finishEditingHandler();
+      this.finishEditingHandler(); // ???
+      List.finishEditing();
     }
   }
 
   onClickBtnDelete() {
-    if (!this.btnDeleteEl.matches(".back")) {
-      this.deleteHandler();
-    } else {
+    if (!this.checkState() && !this.btnDeleteEl.matches(".back")) {
+      List.remove(this.getIndex());
+    } else if (this.btnDeleteEl.matches(".back")) {
       this.btnEditEl.classList.remove("active");
       this.btnDeleteEl.classList.remove("back");
       this.deactivateMoving();
-      this.backHandler();
-      if (this.editObj) {
-        this.editObj.finishEditing();
-        this.editObj = undefined;
-      }
+      List.setInitialData();
     }
   }
 
@@ -89,13 +86,11 @@ export default class Buttons {
     );
   }
 
-  // editHandler() {}
-
-  // finishEditingHandler() {}
-
-  // deleteHandler() {}
-
-  // backHandler() {}
+  checkState() {
+    return [...this.btnGroupEl.closest(".main-list").children].some(
+      (child) => child.dataset.state === "editing"
+    );
+  }
 
   getElement() {
     return this.btnGroupEl;

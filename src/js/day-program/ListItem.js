@@ -19,8 +19,6 @@ export default class ListItem {
     this.btns = new Buttons();
     this.btns.editHandler = this.edit.bind(this);
     this.btns.finishEditingHandler = this.finishEditing.bind(this);
-    this.btns.deleteHandler = this.delete.bind(this);
-    this.btns.backHandler = this.back.bind(this);
     this.createElement();
     this.editObj = undefined;
   }
@@ -39,26 +37,18 @@ export default class ListItem {
     return this.liEl;
   }
 
-  edit() {
-    this.runEditingNavigation();
+  async edit() {
+    await this.checkEdit().then((resolve) => {
+      if (!resolve) {
+        this.liEl.dataset.state = "editing";
+        this.runEditingNavigation();
+      }
+    });
   }
 
   finishEditing() {
+    delete this.liEl.dataset.state;
     this.liEl.removeEventListener("click", this.onClickLiEl);
-    if (this.editObj) {
-      this.editObj.finishEditing();
-      this.editObj = undefined;
-    }
-    this.getNewData();
-  }
-
-  delete() {
-    this.removeExercise();
-  }
-
-  back() {
-    this.liEl.removeEventListener("click", this.onClickLiEl);
-    this.setInitialData();
     if (this.editObj) {
       this.editObj.finishEditing();
       this.editObj = undefined;
@@ -75,47 +65,22 @@ export default class ListItem {
       case e.target.matches(".main-list-item__img"):
         this.editObj = this.img;
         this.img.edit();
-        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
-      case e.target.matches(".main-list-item__description"):
+      case e.target.matches(".main-list-item__description") ||
+        e.target.matches(".main-list-item__description_wrapper"):
         this.editObj = this.description;
         this.description.edit();
-        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
-      case e.target.matches(".main-list-item__approaches"):
+      case e.target.matches(".main-list-item__approaches") ||
+        e.target.matches(".main-list-item__approaches_wrapper"):
         this.editObj = this.approaches;
         this.approaches.edit();
-        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
-      case e.target.matches(".main-list-item__repetitions"):
+      case e.target.matches(".main-list-item__repetitions") ||
+        e.target.matches(".main-list-item__repetitions_wrapper"):
         this.editObj = this.repetitions;
         this.repetitions.edit();
-        // this.liEl.removeEventListener("click", this.onClickLiEl);
         break;
     }
-  }
-
-  removeExercise() {
-    console.log("removeExercise");
-  }
-
-  setInitialData() {
-    this.img.setInitialData();
-    this.description.setInitialData();
-    this.approaches.setInitialData();
-    this.repetitions.setInitialData();
-  }
-
-  getNewData() {
-    const newExercise = {
-      img: {
-        file: this.img.getNewData(),
-        alt: "",
-      },
-      description: this.description.getNewData(),
-      approaches: this.approaches.getNewData(),
-      repetitions: this.repetitions.getNewData(),
-    };
-    console.log(newExercise);
   }
 }

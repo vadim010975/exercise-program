@@ -1,20 +1,6 @@
-export default class Repetitions {
-  constructor(value) {
-    this.value = value;
-    [this.wrapperEl, this.element] = this.createElement(value);
-  }
+import Field from "./Field.js";
 
-  getElement() {
-    return this.wrapperEl;
-  }
-
-  edit() {
-    this.element.removeAttribute("readonly");
-  }
-
-  finishEditing() {
-    this.element.setAttribute("readonly", true);
-  }
+export default class Repetitions extends Field{
 
   createElement(value) {
     const wrapperEl = document.createElement("div");
@@ -27,13 +13,5 @@ export default class Repetitions {
     wrapperEl.appendChild(element);
     element.value = value;
     return [wrapperEl, element];
-  }
-
-  setInitialData() {
-    this.element.value = this.value;
-  }
-
-  getNewData() {
-    return this.element.value;
   }
 }

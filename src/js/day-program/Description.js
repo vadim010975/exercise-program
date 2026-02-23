@@ -1,19 +1,10 @@
-export default class Description {
-  constructor(value) {
-    this.value = value;
-    [this.wrapperEl, this.element] = this.createElement(value);
-  }
+import Field from "./Field.js";
 
-  getElement() {
-    return this.wrapperEl;
-  }
+export default class Description extends Field{
 
   edit() {
     this.element.removeAttribute("readonly");
-  }
-
-  finishEditing() {
-    this.element.setAttribute("readonly", true);
+    this.element.focus();
   }
 
   createElement(value) {
@@ -30,13 +21,5 @@ export default class Description {
     wrapperEl.appendChild(element);
     element.value = value;
     return [wrapperEl, element];
-  }
-
-  setInitialData() {
-    this.element.value = this.value;
-  }
-
-  getNewData() {
-    return this.element.value;
   }
 }

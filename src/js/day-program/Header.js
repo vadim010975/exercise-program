@@ -1,4 +1,4 @@
-
+import List from "./List.js";
 
 export default class Header {
 
@@ -19,7 +19,7 @@ export default class Header {
   }
 
   static onClickBtnAdd() {
-    console.log("BtnAdd");
+    List.add();
   }
 
   static onClickBtnHome() {

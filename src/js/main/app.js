@@ -1,3 +1,6 @@
-import Main from "./Main.js";
+import Header from "./Header.js";
+import ListOfDays from "./ListOfDays.js";
 
-Main.init();
+Header.init();
+
+ListOfDays.init();

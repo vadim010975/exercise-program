@@ -1,3 +1,15 @@
-import Main from "./Main.js";
+import Header from "./Header.js";
+import List from "./List.js";
 
-Main.init();
+const day = localStorage.getItem("day");
+
+if (day) {
+
+  Header.init(day);
+
+  List.init(day);
+
+}
+
+
+
