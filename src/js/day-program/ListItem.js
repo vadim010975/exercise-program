@@ -16,11 +16,17 @@ export default class ListItem {
     this.description = new Description(this.exercise?.description);
     this.approaches = new Approaches(this.exercise?.approaches);
     this.repetitions = new Repetitions(this.exercise?.repetitions);
-    this.btns = new Buttons();
-    this.btns.editHandler = this.edit.bind(this);
-    this.btns.finishEditingHandler = this.finishEditing.bind(this);
+    this.btns = new Buttons(this.buttonsCallback.bind(this));
     this.createElement();
     this.editObj = undefined;
+  }
+
+  buttonsCallback(val) {
+    if (val.edit) {
+      this.edit();
+    } else if (val.finishEditing) {
+      this.finishEditing();
+    }
   }
 
   createElement() {
@@ -38,12 +44,11 @@ export default class ListItem {
   }
 
   async edit() {
-    await this.checkEdit().then((resolve) => {
-      if (!resolve) {
-        this.liEl.dataset.state = "editing";
-        this.runEditingNavigation();
-      }
-    });
+    const res = await this.checkEdit();
+    if (!res) {
+      this.liEl.dataset.state = "editing";
+      this.runEditingNavigation();
+    }
   }
 
   finishEditing() {

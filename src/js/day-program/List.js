@@ -6,7 +6,7 @@ export default class List {
   static ulEl = document.querySelector(".main-list");
 
   static init(day) {
-    if (data.some(item => item.name === day)) {
+    if (data.some((item) => item.name === day)) {
       List.program = data.find((item) => item.name === day)?.program;
       List.render();
     } else {
@@ -29,10 +29,7 @@ export default class List {
       replaceableElement = editableElement.previousElementSibling;
       if (replaceableElement) {
         replaceableElement.replaceWith(editableElement);
-        editableElement.insertAdjacentElement(
-          "afterend",
-          replaceableElement
-        );
+        editableElement.insertAdjacentElement("afterend", replaceableElement);
       }
     } else if (data.direction === "down") {
       replaceableElement = editableElement.nextElementSibling;
@@ -96,8 +93,6 @@ export default class List {
         return;
       }
     });
-
-    
   }
 
   static add() {

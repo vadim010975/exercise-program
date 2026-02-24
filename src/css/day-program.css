@@ -216,10 +216,8 @@ ul {
   transition: opacity 0.3s;
 }
 
-.main-list-item:has(.main-list-item__btn.btn-edit.active) 
-.main-list-item__btn-group,
-.main-list:not(:has(.main-list-item__btn.btn-edit.active)) 
-.main-list-item:hover .main-list-item__btn-group {
+.main-list-item:has(.main-list-item__btn.btn-edit.active) .main-list-item__btn-group,
+.main-list:not(:has(.main-list-item__btn.btn-edit.active)) .main-list-item:hover .main-list-item__btn-group {
   opacity: 1;
 }
 
@@ -231,6 +229,10 @@ ul {
   background-position: center center;
   border: none;
   background-color: inherit;
+}
+
+[data-state=editing] .main-list-item__btn,
+.main-list:not(:has([data-state=editing])) .main-list-item__btn {
   cursor: pointer;
 }
 

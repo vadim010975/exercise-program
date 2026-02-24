@@ -1,7 +1,8 @@
 import List from "./List.js";
 
 export default class Buttons {
-  constructor() {
+  constructor(callback) {
+    this.callback = callback;
     this.btnGroupEl = document.createElement("div");
     this.btnGroupEl.classList.add("main-list-item__btn-group");
     this.btnEditEl = document.createElement("button");
@@ -27,12 +28,12 @@ export default class Buttons {
       this.btnEditEl.classList.add("active");
       this.btnDeleteEl.classList.add("back");
       this.activateMoving();
-      this.editHandler();
+      this.callback({ edit: true });
     } else if (this.btnEditEl.matches(".active")) {
       this.btnEditEl.classList.remove("active");
       this.btnDeleteEl.classList.remove("back");
       this.deactivateMoving();
-      this.finishEditingHandler(); // ???
+      this.callback({ finishEditing: true });
       List.finishEditing();
     }
   }
