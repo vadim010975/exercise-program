@@ -28,6 +28,7 @@ ul {
   margin: 0 auto;
   max-width: 1200px;
   background-color: var(--main-background);
+  position: relative;
 }
 
 .header {
