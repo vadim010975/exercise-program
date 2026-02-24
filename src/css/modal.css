@@ -1,0 +1,36 @@
+.modal-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    display: none;
+}
+
+.modal-background.active {
+    display: block;
+}
+
+.modal {
+    background-color: #e2d5b4;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 40px;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px 2px rgba(0, 0, 0, .3);
+}
+
+.modal__button {
+    text-transform: uppercase;
+    font-size: 12px;
+    background: inherit;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
