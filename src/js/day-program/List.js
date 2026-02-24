@@ -1,5 +1,6 @@
 import data from "../data.js";
 import ListItem from "./ListItem.js";
+import Modal from "./Modal.js";
 
 export default class List {
   static ulEl = document.querySelector(".main-list");
@@ -85,10 +86,18 @@ export default class List {
   }
 
   static remove(index) {
-    [...List.ulEl.children].forEach((child, idx) => {
-      if (+index === +idx) child.remove();
+    Modal.init(document.body, (val) => {
+      if (val.remove) {
+        [...List.ulEl.children].forEach((child, idx) => {
+          if (+index === +idx) child.remove();
+          List.finishEditing();
+        });
+      } else if (val.cancel) {
+        return;
+      }
     });
-    List.finishEditing();
+
+    
   }
 
   static add() {

@@ -13,6 +13,8 @@ body {
   font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 400;
+  position: relative;
+  min-height: 100vh;
 }
 
 ul {
@@ -28,7 +30,9 @@ ul {
   margin: 0 auto;
   max-width: 1200px;
   background-color: var(--main-background);
-  position: relative;
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -274,6 +278,10 @@ ul {
   height: 200px;
 }
 
+.spring {
+  flex-grow: 1;
+}
+
 .footer {
-  height: 100px;
+  min-height: 100px;
 }
