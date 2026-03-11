@@ -1,5 +1,7 @@
 export const IMG_PATH = "/src/img/";
 
+export const HOST = "http://127.0.0.1:7070";
+
 const data = [
   {
     name: "понедельник",

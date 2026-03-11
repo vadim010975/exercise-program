@@ -6,8 +6,9 @@ export default class List {
   static ulEl = document.querySelector(".main-list");
 
   static init(day) {
-    if (data.some((item) => item.name === day)) {
-      List.program = data.find((item) => item.name === day)?.program;
+    List.day = day;
+    if (data.some((item) => item.name === List.day)) {
+      List.program = data.find((item) => item.name === List.day)?.program;
       List.render();
     } else {
       List.add();
@@ -79,7 +80,10 @@ export default class List {
       )?.value;
       currentProgram.push(item);
     });
-    console.log(currentProgram);
+    console.log({
+      name: List.day,
+      program: [...currentProgram],
+    });
   }
 
   static remove(index) {
