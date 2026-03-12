@@ -5,7 +5,7 @@
 
 const createRequest = async (options = {}) => {
   try {
-    let response = undefined;
+    let response;
     if (!options.method || options.method === "GET") {
       if (options?.data) {
         let request;
@@ -13,18 +13,19 @@ const createRequest = async (options = {}) => {
           request += key + '=' + options.data[key] + '&';
         }
           request = request.slice(0, -1);
-      } else {
-        delete options.data;
       }
       response = await fetch(options.url);
     } else {
-      formData = new FormData;
+      const formData = new FormData;
       for (let key in options.data) {
         formData.append(key, options.data[key]);
       }
       response = await fetch(options.url, {
         method: options.method,
-        formData
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData,
       });
     }
     const result = await response.json();

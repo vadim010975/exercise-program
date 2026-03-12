@@ -1,6 +1,7 @@
 import data from "../data.js";
 import ListItem from "./ListItem.js";
 import Modal from "./Modal.js";
+import Program from "../api/Program.js";
 
 export default class List {
   static ulEl = document.querySelector(".main-list");
@@ -80,10 +81,20 @@ export default class List {
       )?.value;
       currentProgram.push(item);
     });
-    console.log({
+    const callback = (error, result) => {
+      if (result) {
+        console.log(result);
+        List.day = result?.name;
+        List.program = result?.program;
+        List.setInitialData();
+      } else if (error) {
+        console.log(error);
+      }
+    };
+    Program.set({
       name: List.day,
       program: [...currentProgram],
-    });
+    }, callback);
   }
 
   static remove(index) {

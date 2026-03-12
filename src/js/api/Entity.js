@@ -14,11 +14,20 @@ export default class Entity {
   /**
    * Запрашивает с сервера список данных.
    * */
-  static async list(data = undefined, callback){
+  static async list(data = undefined, callback) {
     await createRequest({
       url: this.URL,
       data,
       method: 'GET', 
+      callback,
+    });
+  }
+
+  static set(data, callback) {
+    createRequest({
+      url: this.URL,
+      data,
+      method: 'POST', 
       callback,
     });
   }
