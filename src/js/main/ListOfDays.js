@@ -36,6 +36,6 @@ export default class ListOfDays {
         console.log(error);
       }
     };
-    await Program.list(undefined, callback);
+    await Program.getList(undefined, callback);
   }
 }

@@ -1,4 +1,3 @@
-import { IMG_PATH } from "../data.js";
 import Img from "./Img.js";
 import Description from "./Description.js";
 import Approaches from "./Approaches.js";
@@ -6,12 +5,14 @@ import Repetitions from "./Repetitions.js";
 import Buttons from "./Buttons.js";
 
 export default class ListItem {
-  constructor(exercise) {
+  constructor(exercise, callback) {
     this.exercise = exercise;
+    this.callback = callback;
     this.liEl = document.createElement("li");
     this.img = new Img(
-      IMG_PATH + this.exercise?.exercise?.img,
-      this.exercise?.exercise?.alt
+      this.exercise?.exercise?.img,
+      this.exercise?.exercise?.alt,
+      this.imgCallback.bind(this)
     );
     this.description = new Description(this.exercise?.description);
     this.approaches = new Approaches(this.exercise?.approaches);
@@ -19,6 +20,11 @@ export default class ListItem {
     this.btns = new Buttons(this.buttonsCallback.bind(this));
     this.createElement();
     this.editObj = undefined;
+  }
+
+  imgCallback(file) {
+    this.imgFile = file;
+    this.callback(file);
   }
 
   buttonsCallback(val) {

@@ -1,7 +1,8 @@
 export default class Img {
-  constructor(src, alt) {
+  constructor(src, alt, callback) {
     this.src = src;
     this.alt = alt;
+    this.callback = callback;
     [this.wrapperEl, this.element] = this.createElement(this.src, this.alt);
   }
 
@@ -27,7 +28,9 @@ export default class Img {
     if (!this.newFile) return;
     const url = URL.createObjectURL(this.newFile);
     this.element.src = url;
+    this.element.dataset.imgName = this.newFile.lastModified;
     this.finishEditing();
+    this.callback(this.newFile);
   }
 
   onClickEl() {

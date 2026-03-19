@@ -1,4 +1,3 @@
-import data from "../data.js";
 import ListItem from "./ListItem.js";
 import Modal from "./Modal.js";
 import Program from "../api/Program.js";
@@ -6,10 +5,13 @@ import Program from "../api/Program.js";
 export default class List {
   static ulEl = document.querySelector(".main-list");
 
-  static init(day) {
-    List.day = day;
-    if (data.some((item) => item.name === List.day)) {
-      List.program = data.find((item) => item.name === List.day)?.program;
+  static imgFiles = [];
+
+  static async init(day) {
+    await List.getData(day);
+    /* загрузился List.data */
+    console.log(List.data);
+    if (List.data.program.length > 0) {
       List.render();
     } else {
       List.add();
@@ -17,11 +19,15 @@ export default class List {
   }
 
   static render() {
-    List.program.forEach((item) => {
-      const listItem = new ListItem(item);
+    List.data.program.forEach((item) => {
+      const listItem = new ListItem(item, List.callback);
       listItem.checkEdit = List.checkEdit;
       List.ulEl.appendChild(listItem.getElement());
     });
+  }
+
+  static callback(imgFile) {
+    List.imgFiles.push(imgFile);
   }
 
   static changeCurrentProgram(data) {
@@ -66,7 +72,22 @@ export default class List {
     const currentProgram = [];
     [...List.ulEl.children].forEach((child) => {
       const item = { exercise: {} };
-      item.exercise.img = child.querySelector(".main-list-item__img")?.src;
+      if (
+        child
+          .querySelector(".main-list-item__img")
+          .hasAttribute("data-img-name")
+      ) {
+        List.imgFiles.forEach((imgFile) => {
+          if (
+            imgFile.lastModified.toString() ===
+            child.querySelector(".main-list-item__img").dataset.imgName
+          ) {
+            item.exercise.img = imgFile;
+          }
+        });
+      } else {
+        item.exercise.img = "same";
+      }
       item.exercise.alt =
         child.querySelector(".main-list-item__img").alt ||
         "физическое упражнение";
@@ -83,18 +104,21 @@ export default class List {
     });
     const callback = (error, result) => {
       if (result) {
-        console.log(result);
-        List.day = result?.name;
-        List.program = result?.program;
+        List.data.name = result?.name;
+        List.data.program = result?.program;
         List.setInitialData();
       } else if (error) {
         console.log(error);
       }
     };
-    Program.set({
-      name: List.day,
-      program: [...currentProgram],
-    }, callback);
+    const res = {
+      data: JSON.stringify({
+        name: List.data.name,
+        program: [...currentProgram],
+      }),
+    };
+    console.log(res);
+    Program.set(res, callback);
   }
 
   static remove(index) {
@@ -129,5 +153,17 @@ export default class List {
     List.ulEl.insertAdjacentElement("afterbegin", newEl.getElement());
     newEl.checkEdit = List.checkEdit;
     newEl.btns.btnEditEl.dispatchEvent(new MouseEvent("click"));
+  }
+
+  static async getData(name) {
+    const callback = (error, result) => {
+      if (result) {
+        // console.log(result);
+        List.data = result;
+      } else if (error) {
+        console.log(error);
+      }
+    };
+    await Program.get({ name }, callback);
   }
 }

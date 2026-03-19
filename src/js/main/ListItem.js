@@ -19,7 +19,7 @@ export default class ListItem {
     element.appendChild(divListEl);
     this.program.forEach(item => {
       const imgEl = document.createElement("img");
-      imgEl.setAttribute("src", IMG_PATH + item?.exercise?.img);
+      imgEl.setAttribute("src", item?.exercise?.img);
       imgEl.setAttribute("alt", item?.exercise?.alt);
       imgEl.classList.add("item__img");
       const divEl = document.createElement("div");

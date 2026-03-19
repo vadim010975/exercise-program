@@ -5,16 +5,18 @@
 
 const createRequest = async (options = {}) => {
   try {
-    let response;
+    let response, request;
     if (!options.method || options.method === "GET") {
       if (options?.data) {
-        let request;
+        request = options.url + '?';
         for (let key in options.data) {
           request += key + '=' + options.data[key] + '&';
         }
           request = request.slice(0, -1);
+      } else {
+        request = options.url;
       }
-      response = await fetch(options.url);
+      response = await fetch(request);
     } else {
       const formData = new FormData;
       for (let key in options.data) {
@@ -22,9 +24,9 @@ const createRequest = async (options = {}) => {
       }
       response = await fetch(options.url, {
         method: options.method,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+        // headers: {
+        //   "Content-Type": "application/x-www-form-urlencoded",
+        // },
         body: formData,
       });
     }
